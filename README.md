@@ -27,3 +27,9 @@ Los archivos de código iniciales siguen en la raíz: `variables.tf`, `main.tf` 
 El módulo local `modulo_ficha` permite describir el portal principal y la ficha de ayuda sin duplicar la definición del recurso. Cada llamada recibe su nombre y el entorno común: en el escenario predeterminado se prevén `portal-demo` y `portal-ayuda` en `pruebas`; en integración, `portal-interno` y `portal-ayuda` en `integracion`.
 
 El pipeline revisa recursivamente el formato, valida la configuración y ejecuta ambos planes; también genera un resumen y un artefacto de evidencia. Solo se calculan planes de `terraform_data`: no hay `apply`, servicios cloud, infraestructura desplegada, costes de infraestructura ni observabilidad real. Antes de aprobar una configuración, el equipo debe revisar el cambio de código, los planes y la evidencia.
+
+## Política del laboratorio
+
+La política acepta exactamente dos fichas ficticias: `portal` y `ayuda`. Exige que compartan un entorno permitido para mantener ambas partes del ejemplo alineadas; `validate` comprueba la coherencia técnica de la configuración, `plan` calcula los cambios previstos y la política decide si esos cambios respetan las reglas del laboratorio.
+
+En GitHub Actions puedes revisar los planes, las decisiones de ambas políticas y el resumen de resultados del trabajo **Validacion IaC**; también se publica un artefacto de evidencia con ese resumen. Aquí solo se calculan planes con datos ficticios: no se ejecuta `apply` ni se despliega infraestructura. Esta política es didáctica y no equivale a una aprobación de producción.
