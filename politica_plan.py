@@ -3,8 +3,8 @@ import sys
 
 
 EXPECTED_ADDRESSES = {
-    "module.portal.terraform_data.ficha": "portal",
-    "module.ayuda.terraform_data.ficha": "ayuda",
+    'module.fichas["portal"].terraform_data.ficha': "portal",
+    'module.fichas["ayuda"].terraform_data.ficha': "ayuda",
 }
 EXPECTED_INPUTS = {"nombre", "entorno"}
 ALLOWED_ENVIRONMENTS = {"desarrollo", "pruebas", "integracion"}
@@ -107,10 +107,10 @@ def main():
             rechazar(f"entorno no permitido para {direccion}: {entorno}.")
 
     entorno_portal = cambios_por_direccion[
-        "module.portal.terraform_data.ficha"
+        'module.fichas["portal"].terraform_data.ficha'
     ]["change"]["after"]["input"]["entorno"]
     entorno_ayuda = cambios_por_direccion[
-        "module.ayuda.terraform_data.ficha"
+        'module.fichas["ayuda"].terraform_data.ficha'
     ]["change"]["after"]["input"]["entorno"]
     if entorno_portal != entorno_ayuda:
         rechazar("portal y ayuda deben pertenecer al mismo entorno.")

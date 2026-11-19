@@ -1,11 +1,14 @@
-module "portal" {
-  source  = "./modulo_ficha"
-  nombre  = var.nombre_aplicacion
-  entorno = var.entorno
+locals {
+  catalogo = {
+    portal = var.nombre_aplicacion
+    ayuda  = "portal-ayuda"
+  }
 }
 
-module "ayuda" {
-  source  = "./modulo_ficha"
-  nombre  = "portal-ayuda"
+module "fichas" {
+  source   = "./modulo_ficha"
+  for_each = local.catalogo
+
+  nombre  = each.value
   entorno = var.entorno
 }
